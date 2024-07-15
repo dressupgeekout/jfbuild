@@ -20,6 +20,7 @@ BUILDLDFLAGS=-lm
 #  macOS: x86_64-apple-darwin18.2.0
 #  mingw32: x86_64-w64-mingw32 i686-w64-mingw32
 #  FreeBSD: x86_64-unknown-freebsd10.4
+#  NetBSD: x86_64--netbsd
 TARGETMACHINE?=$(strip $(shell $(CC) -dumpmachine))
 export TARGETMACHINE
 
@@ -28,7 +29,7 @@ ifndef PLATFORM
 	ifneq (,$(findstring -linux,$(TARGETMACHINE)))
 		PLATFORM=LINUX
 	endif
-	ifneq (,$(findstring -freebsd,$(TARGETMACHINE)))
+	ifneq (,$(findstring bsd,$(TARGETMACHINE)))
 		PLATFORM=BSD
 	endif
 	ifneq (,$(findstring -mingw32,$(TARGETMACHINE)))
@@ -96,7 +97,7 @@ ifeq ($(RENDERTYPE),SDL)
 		ifneq (,$(shell $(PKGCONFIG) --atleast-version=3.4 gtk+-3.0 && echo yes))
 			HAVE_GTK=1
 			GTKCONFIG_CFLAGS=-DHAVE_GTK $(shell $(PKGCONFIG) --cflags gtk+-3.0)
-			GTKCONFIG_LIBS=$(shell $(PKGCONFIG) --libs gtk+-3.0) -ldl
+			GTKCONFIG_LIBS=$(shell $(PKGCONFIG) --libs gtk+-3.0)
 		else
 			HAVE_GTK=0
 		endif

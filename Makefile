@@ -129,7 +129,7 @@ EDITOROBJS=$(SRC)/build.$o \
 # Specialise for the platform
 ifeq ($(PLATFORM),LINUX)
 	NASMFLAGS+= -f elf
-	OURLDFLAGS+= -lm
+	OURLDFLAGS+= -lm -ldl
 endif
 ifeq ($(PLATFORM),BSD)
 	NASMFLAGS+= -f elf
