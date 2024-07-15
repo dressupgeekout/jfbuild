@@ -33,6 +33,10 @@
 #  include <sys/sysctl.h> // for sysctl() to get path to executable
 #endif
 
+#if defined(__NetBSD__)
+#  include <dirent.h> // for dirfd()
+#endif
+
 #if defined(__HAIKU__)
 #  include <kernel/image.h>
 #  include <libgen.h>

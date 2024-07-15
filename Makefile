@@ -146,6 +146,10 @@ ifeq ($(PLATFORM),DARWIN)
 	EDITOROBJS+= $(SRC)/EditorStartupWinController.$o
 endif
 
+ifeq ($(shell uname -s),NetBSD)
+	OURCPPFLAGS+=-D_NETBSD_SOURCE
+endif
+
 # Select the system layer
 ifeq ($(RENDERTYPE),SDL)
 	ENGINEOBJS+= $(SRC)/sdlayer2.$o
